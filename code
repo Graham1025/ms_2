@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int Calculate(char *p){
+	int length = strlen(p), num = 0;
+	if (length < 3) return num;
+	int count1 = 0, count2 = 1;
+	for (int i = 1; i < length; i++)
+	{
+		if (p[i] == p[i - 1])
+			if (count2 < 2)
+				count2++;
+			else
+				if (i < length - 1 && p[i] == p[i + 1] || count1 == 2)
+				{
+					count1 = 2;
+					count2 = 1;
+					p[i] = (p[i] == 'a') ? 'b' : 'a';
+					num++;
+				}
+				else
+				{
+					count1++;
+					count2 = 2;
+					num++;
+				}
+		else
+		{
+			count1 = count2;
+			count2 = 1;
+		}
+	}
+	return num;
+}
+
+int main(){
+	char p[] = "aaabbbbb";
+	int num = Calculate(p);
+}
